@@ -1,46 +1,41 @@
 export default class HolbertonCourse {
-    constructor(name, length, students) {
-	this.name = name;
-	this.length = length;
-	this.students = students;
+  constructor(name, length, students) {
+    if (typeof name !== 'string') throw TypeError('name must be a string');
+    if (typeof length !== 'number') throw TypeError('length must be a number');
+    if (students.constructor !== Array && students.every((el) => typeof el === 'string')) {
+      throw TypeError('students must be an array of strings');
     }
+    this._name = name;
+    this._length = length;
+    this._students = students;
+  }
 
-    get name() {
-	return this._name;
-    }
+  get name() {
+    return this._name;
+  }
 
-    set name(NameValue) {
-	if (typeof NameValue !== 'string') {
-	    throw new TypeError('Name must be a string');
-	}
-	this._name = NameValue;
-    }
+  get length() {
+    return this._length;
+  }
 
-    get length() {
-	return this._length;
-    }
+  get students() {
+    return this._students;
+  }
 
-    set length(LengthValue) {
-	if (typeof LengthValue !== 'number') {
-	    throw new TypeError('Length must be a number');
-	}
-	this._length = LengthValue;
-    }
+  set name(newName) {
+    if (typeof newName !== 'string') throw TypeError('name must be a string');
+    this._name = newName;
+  }
 
-    get students() {
-	return this._students;
-    }
+  set length(newLength) {
+    if (typeof newLength !== 'number') throw TypeError('length must be a number');
+    this._length = newLength;
+  }
 
-    set students(CurrentStudents) {
-	if (typeof CurrentStudents === 'object') {
-	    for (const student in CurrentStudents) {
-		if (typeof student !== 'string') {
-		    throw new TypeError('Students must be an array');
-		}
-	    }
-	} else {
-	    throw new TypeError('Students must be an array of strings');
-	}
-	this._students = CurrentStudents;
+  set students(newStudents) {
+    if (newStudents.constructor !== Array && newStudents.every((el) => typeof el === 'string')) {
+      throw TypeError('students must be an array of strings');
     }
+    this._students = newStudents;
+  }
 }
